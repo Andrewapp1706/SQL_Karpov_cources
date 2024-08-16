@@ -1,0 +1,4 @@
+SELECT toStartOfMonth(toDateOrNull(host_since)) as dates, COUNT(DISTINCT host_id) as numhosts
+FROM listings
+GROUP BY dates
+ORDER BY numhosts DESC
