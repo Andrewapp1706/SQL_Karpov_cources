@@ -1,0 +1,11 @@
+SELECT
+    toStartOfMonth(InvoiceDate) as month,
+    AVG(Quantity) as avgstuff,
+    MIN(Quantity) AS minstuff,
+    MAX(Quantity) as maxstuff
+FROM retail
+WHERE Country='United Kingdom'
+    AND Description != 'Manual'
+    AND Quantity > 0
+GROUP BY month
+ORDER BY avgstuff DESC
