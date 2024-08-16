@@ -1,0 +1,14 @@
+SELECT 
+    AVG(Quantity) as quan,
+    Country
+FROM (
+    SELECT 
+        InvoiceNo,
+        Quantity,
+        Country
+    FROM retail
+    WHERE 
+        Quantity>0
+    GROUP BY InvoiceNo, Country, Quantity
+    ) as table1
+GROUP BY Country
