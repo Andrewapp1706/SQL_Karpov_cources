@@ -1,0 +1,9 @@
+SELECT 
+    BuyDate,
+    MIN(Rub) as MinCheck,
+    MAX(Rub) as MaxCheck,
+    AVG(Rub) as AvgCheck
+FROM checks    
+GROUP BY BuyDate
+ORDER BY BuyDate DESC
+LIMIT 10
