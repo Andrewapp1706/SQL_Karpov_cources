@@ -1,0 +1,12 @@
+SELECT
+    UserID,
+    AVG(Rub) AS AverageCheck,
+    CASE
+        WHEN AVG(Rub) < 5 THEN 'A'
+        WHEN AVG(Rub) >= 5 AND AVG(Rub) < 10 THEN 'B'
+        WHEN AVG(Rub) >= 10 AND AVG(Rub) < 20 THEN 'C'
+        WHEN AVG(Rub) >= 20 THEN 'D'
+    END AS category
+FROM checks
+GROUP BY UserID
+ORDER BY UserID
