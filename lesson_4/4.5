@@ -1,0 +1,8 @@
+SELECT 
+    room_type,
+    AVG(toFloat32OrNull(replaceRegexpAll(price, '[$,]', ''))) as AvgPrice,
+    AVG(toFloat32OrNull(replaceRegexpAll(security_deposit, '[$,]', ''))) as avg_dep,
+    AVG(toFloat32OrNull(replaceRegexpAll(cleaning_fee, '[$,]', ''))) as avg_fee
+FROM listings
+GROUP BY room_type
+ORDER BY avg_dep DESC
