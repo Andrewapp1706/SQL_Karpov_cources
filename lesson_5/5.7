@@ -1,0 +1,13 @@
+SELECT 
+    host_id, 
+    CASE
+        WHEN multiSearchAnyCaseInsensitive(amenities, ['kitchen']) 
+        AND cancellation_policy='flexible' THEN 'good'
+        WHEN multiSearchAnyCaseInsensitive(amenities, ['kitchen']) 
+        AND NOT (cancellation_policy='flexible') THEN 'ok'
+        ELSE 'not ok'
+        END AS status
+FROM
+    listings
+ORDER BY status
+LIMIT 5
