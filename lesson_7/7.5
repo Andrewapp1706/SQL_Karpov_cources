@@ -1,0 +1,17 @@
+SELECT 
+    AVG(TotalPrice) as AOV,
+    Country,
+    Month
+FROM (
+    SELECT 
+        InvoiceNo,
+        SUM(Quantity*UnitPrice) as TotalPrice,
+        Country,
+        toStartOfMonth(InvoiceDate) as Month
+    FROM retail
+    WHERE 
+        Quantity>0
+        AND Country IN ('United Kingdom', 'Germany', 'France', 'Spain', 'Netherlands', 'Belgium', 'Switzerland', 'Portugal', 'Australia', 'USA')
+    GROUP BY InvoiceNo, Country, Month
+    ) as table1
+GROUP BY Country, Month
