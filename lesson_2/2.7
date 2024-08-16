@@ -1,0 +1,7 @@
+SELECT Country,
+    AVG(Quantity) as avgcnt,
+    AVG(UnitPrice) as avgprice
+FROM retail
+WHERE Description != 'Manual'
+GROUP BY Country
+ORDER BY avgprice DESC
