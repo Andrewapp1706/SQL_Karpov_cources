@@ -1,0 +1,7 @@
+SELECT 
+    CustomerID,
+    SUM(Quantity) AS sumq
+FROM retail
+WHERE Country = 'Netherlands'
+GROUP BY CustomerID
+ORDER BY sumq DESC
