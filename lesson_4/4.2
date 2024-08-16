@@ -1,0 +1,12 @@
+SELECT
+    AVG(toInt32OrNull(replaceAll(host_response_rate, '%', ''))) as AvgResp,
+    host_is_superhost AS Super
+FROM
+    ( SELECT 
+        DISTINCT host_id,
+        host_response_rate,
+        host_is_superhost
+    FROM listings    
+    ) AS tab1
+GROUP BY
+    host_is_superhost
