@@ -1,0 +1,16 @@
+SELECT 
+    region,
+    type,
+    date,
+    total_volume,
+    total_volume - LAG(total_volume, 2) OVER w AS week_diff 
+FROM avocado
+WHERE 
+    region = 'NewYork'
+    AND year = '2018'
+WINDOW w AS 
+    (
+    PARTITION BY type
+    ORDER BY date
+    )
+ORDER BY type    
