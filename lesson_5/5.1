@@ -1,0 +1,10 @@
+SELECT
+    id,
+    toFloat64OrNull(review_scores_rating),
+    reviews_per_month
+FROM
+    listings
+WHERE
+    (toFloat64OrNull(review_scores_rating)  > (SELECT AVG(toFloat64OrNull(review_scores_rating)) FROM listings))
+	AND (reviews_per_month < 3)
+ORDER BY reviews_per_month DESC, toFloat64OrNull(review_scores_rating) DESC
