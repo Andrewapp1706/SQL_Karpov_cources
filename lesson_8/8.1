@@ -1,0 +1,16 @@
+SELECT 
+    region,
+    date,
+    total_volume,
+    SUM(total_volume) OVER w AS volume 
+FROM avocado
+WHERE 
+    region IN ('NewYork', 'LosAngeles')
+    AND type = 'organic'
+WINDOW w AS 
+    (
+    PARTITION BY region, year
+    ORDER BY date
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    )  
+ORDER BY region DESC
