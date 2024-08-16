@@ -1,0 +1,6 @@
+SELECT 
+    AVG(toFloat32OrNull(replaceRegexpAll(price, '[$,]', ''))) as AvgPrice,
+    neighbourhood_cleansed 
+FROM listings
+GROUP BY neighbourhood_cleansed
+ORDER BY AvgPrice
