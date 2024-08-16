@@ -1,0 +1,6 @@
+SELECT toStartOfMonth(InvoiceDate) as StartMonth,
+    SUM(Quantity*UnitPrice) as Revenue
+FROM retail
+WHERE Description != 'Manual'
+GROUP BY StartMonth
+ORDER BY Revenue DESC
