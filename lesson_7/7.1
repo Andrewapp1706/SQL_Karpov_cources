@@ -1,0 +1,5 @@
+SELECT 
+    Country,
+    COUNT(DISTINCT CustomerID) AS unique_customers
+FROM retail
+GROUP BY Country
