@@ -1,0 +1,13 @@
+SELECT 
+    AVG(TotalPrice) as AOV,
+    Country
+FROM (
+    SELECT 
+        InvoiceNo,
+        SUM(Quantity*UnitPrice) as TotalPrice,
+        Country
+    FROM retail
+    WHERE Quantity>0
+    GROUP BY InvoiceNo, Country
+    ) as table1
+GROUP BY Country
