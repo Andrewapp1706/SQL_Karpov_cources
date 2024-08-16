@@ -1,0 +1,10 @@
+SELECT 
+    region,
+    date,
+    total_volume,
+    total_volume - LAG(total_volume, 1) OVER w AS week_diff 
+FROM avocado
+WHERE 
+    region = 'TotalUS'
+    AND type = 'conventional'
+WINDOW w AS ()
