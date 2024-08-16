@@ -1,0 +1,15 @@
+SELECT
+    id,
+    host_id,
+    geoDistance(13.4050, 52.5200, CAST(longitude AS Float64), CAST(latitude AS Float64)) as dist_mid
+FROM
+    listings
+WHERE
+    geoDistance(13.4050, 52.5200, CAST(longitude AS Float64), CAST(latitude AS Float64)) < (
+        SELECT AVG(geoDistance(13.4050, 52.5200, CAST(longitude AS Float64), CAST(latitude AS Float64)))
+        FROM listings
+    )
+    AND ((toFloat64OrNull(replaceRegexpAll(price, '[$,]', '')) + toFloat64OrNull(replaceRegexpAll(cleaning_fee, '[$,]', ''))/7) < 100)
+    AND multiSearchAnyCaseInsensitive(amenities, ['WiFi'])
+    AND last_review >= '2018-09-01'
+ORDER BY toFloat64OrNull(review_scores_rating) DESC
