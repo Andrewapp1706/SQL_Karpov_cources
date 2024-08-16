@@ -1,0 +1,5 @@
+SELECT Country, 
+    SUM(UnitPrice*Quantity) as Revenue 
+FROM retail
+GROUP BY Country
+ORDER BY Revenue DESC
