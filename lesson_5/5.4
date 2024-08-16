@@ -1,0 +1,14 @@
+WITH 
+    (SELECT (COUNT(DISTINCT reviewer_id)/COUNT(id)) FROM reviews) as rev_room
+
+SELECT 
+    DISTINCT listing_id,
+    COUNT(DISTINCT reviewer_id) as cnt_reviews
+FROM reviews
+INNER JOIN calendar_summary USING(listing_id)
+WHERE 
+    available='t'
+    --AND cnt_reviews>rev_room
+GROUP BY listing_id
+HAVING COUNT(DISTINCT reviewer_id) > rev_room
+ORDER BY listing_id
