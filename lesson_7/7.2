@@ -1,0 +1,7 @@
+SELECT
+    COUNT(DISTINCT CustomerID) as customers,
+    toStartOfMonth(InvoiceDate) as month,
+    Country
+FROM retail
+WHERE Country IN ('United Kingdom', 'Netherlands', 'Australia')
+GROUP BY Country, month
