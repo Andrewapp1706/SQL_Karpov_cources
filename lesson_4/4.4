@@ -1,0 +1,7 @@
+SELECT 
+    host_id,
+    groupArray(id),
+    (MAX(toFloat32OrNull(replaceRegexpAll(price, '[$,]', ''))) - MIN(toFloat32OrNull(replaceRegexpAll(price, '[$,]', '')))) as AvgPrice
+FROM listings
+GROUP BY host_id
+ORDER BY AvgPrice DESC, host_id DESC
